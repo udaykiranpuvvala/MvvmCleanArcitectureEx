@@ -1,6 +1,7 @@
 package com.example.mvvmcleanarchitectureex2
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,8 @@ import android.view.ViewGroup
 import android.widget.AbsListView
 import android.widget.Toast
 import androidx.databinding.DataBindingUtil
+import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mvvmcleanarchitectureex2.data.util.Resource
@@ -56,6 +59,16 @@ class NewsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         newsAdapter = (activity as MainActivity).newsAdapter
+        val navController = Navigation.findNavController(view)
+        newsAdapter.setOnItemClickListener {
+            Log.e("Article","Article :::::::::::::::::::: "+it.url)
+            val bundle = Bundle().apply {
+//                putSerializable("selected_article", it)
+                putString("url",it.url)
+            }
+            Log.e("Article","Article :::::::::::::::::::: "+bundle.toString())
+            navController.navigate(R.id.action_newsFragment_to_infoFragment,bundle)
+        }
         initRecyclerView()
         viewNewsList()
     }

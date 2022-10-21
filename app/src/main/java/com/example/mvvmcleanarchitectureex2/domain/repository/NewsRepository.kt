@@ -2,7 +2,7 @@ package com.example.mvvmcleanarchitectureex2.domain.repository
 
 import com.example.mvvmcleanarchitectureex2.data.util.Resource
 import com.unik.yunews.models.APIResponse
-import com.unik.yunews.models.Article
+import com.example.mvvmcleanarchitectureex2.data.model.Article
 import kotlinx.coroutines.flow.Flow
 
 interface NewsRepository {

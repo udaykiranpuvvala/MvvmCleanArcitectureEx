@@ -4,7 +4,7 @@ import com.example.mvvmcleanarchitectureex2.data.repository.dataSource.NewsRemot
 import com.example.mvvmcleanarchitectureex2.data.util.Resource
 import com.example.mvvmcleanarchitectureex2.domain.repository.NewsRepository
 import com.unik.yunews.models.APIResponse
-import com.unik.yunews.models.Article
+import com.example.mvvmcleanarchitectureex2.data.model.Article
 import kotlinx.coroutines.flow.Flow
 import retrofit2.Response
 

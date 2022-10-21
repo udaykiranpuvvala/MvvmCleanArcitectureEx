@@ -1,18 +1,16 @@
 package com.example.mvvmcleanarchitectureex2.presentation.adapter
 
-import android.content.Context
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
-import androidx.fragment.app.FragmentActivity
 import androidx.recyclerview.widget.AsyncListDiffer
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.mvvmcleanarchitectureex2.R
 import com.example.mvvmcleanarchitectureex2.databinding.NewsListItemBinding
-import com.unik.yunews.models.Article
+import com.example.mvvmcleanarchitectureex2.data.model.Article
 
 class NewsAdapter :RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
@@ -41,6 +39,12 @@ class NewsAdapter :RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
             Glide.with(binding.ivArticle.context)
                 .load(article.urlToImage)
                 .into(binding.ivArticle)
+
+            binding.root.setOnClickListener {
+                onItemClickListener?.let {
+                    it(article)
+                }
+            }
         }
     }
 
@@ -57,5 +61,11 @@ class NewsAdapter :RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     override fun getItemCount(): Int {
         return differ.currentList.size
+    }
+
+    private var onItemClickListener : ((Article)->Unit)?= null
+
+    fun setOnItemClickListener(listener : (Article) -> Unit){
+        onItemClickListener = listener
     }
 }

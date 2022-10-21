@@ -1,6 +1,7 @@
 package com.unik.yunews.models
 
 
+import com.example.mvvmcleanarchitectureex2.data.model.Article
 import com.google.gson.annotations.SerializedName
 
 data class APIResponse(
