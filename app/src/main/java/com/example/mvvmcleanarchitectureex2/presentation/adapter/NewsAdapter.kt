@@ -14,7 +14,7 @@ import com.example.mvvmcleanarchitectureex2.R
 import com.example.mvvmcleanarchitectureex2.databinding.NewsListItemBinding
 import com.unik.yunews.models.Article
 
-class NewsAdapter(val context: Context) :RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter :RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     private val callBack = object  : DiffUtil.ItemCallback<Article>(){
         override fun areItemsTheSame(oldItem: Article, newItem: Article): Boolean {
@@ -38,7 +38,7 @@ class NewsAdapter(val context: Context) :RecyclerView.Adapter<NewsAdapter.NewsVi
             binding.txtPublishAt.text = article.publishedAt
 
             Log.e("NewsAdapter","URL Adapter::::::::::: ${article.urlToImage}")
-            Glide.with(context)
+            Glide.with(binding.ivArticle.context)
                 .load(article.urlToImage)
                 .into(binding.ivArticle)
         }

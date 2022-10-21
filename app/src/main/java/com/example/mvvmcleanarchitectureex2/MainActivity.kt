@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.setupWithNavController
 import com.example.mvvmcleanarchitectureex2.databinding.ActivityMainBinding
+import com.example.mvvmcleanarchitectureex2.presentation.adapter.NewsAdapter
 import com.example.mvvmcleanarchitectureex2.presentation.viewmodel.NewsViewModel
 import com.example.mvvmcleanarchitectureex2.presentation.viewmodel.NewsViewModelFactory
 import dagger.hilt.android.AndroidEntryPoint
@@ -14,6 +15,9 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
+
+    @Inject
+    lateinit var newsAdapter: NewsAdapter
 
     @Inject
     lateinit var factory: NewsViewModelFactory
