@@ -7,13 +7,15 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.mvvmcleanarchitectureex2.data.util.Resource
 import com.example.mvvmcleanarchitectureex2.domain.usecase.GetNewsHeadlinesUseCase
+import com.example.mvvmcleanarchitectureex2.domain.usecase.GetSearchedNewsUseCase
 import com.unik.yunews.models.APIResponse
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class NewsViewModel(
     private val app: Application,
-    private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase
+    private val getNewsHeadlinesUseCase: GetNewsHeadlinesUseCase,
+    private val getSearchedNewsUseCase: GetSearchedNewsUseCase
 ) :AndroidViewModel(app){
     val newsHeadLines :MutableLiveData<Resource<APIResponse>> = MutableLiveData()
 
@@ -26,4 +28,18 @@ class NewsViewModel(
             newsHeadLines.postValue(Resource.Error(e.message.toString()))
         }
     }
+    // getSearchedNewsUseCase
+
+    val searchedNews: MutableLiveData<Resource<APIResponse>> = MutableLiveData()
+
+    fun searchNews(country: String,searchQuery: String,page: Int)=viewModelScope.launch(Dispatchers.IO) {
+        searchedNews.postValue(Resource.Loading())
+        try {
+            val response = getSearchedNewsUseCase.execute(country, searchQuery, page)
+            searchedNews.postValue(response)
+        }catch (e: java.lang.Exception){
+            searchedNews.postValue(Resource.Error(e.message.toString()))
+        }
+    }
+
 }
